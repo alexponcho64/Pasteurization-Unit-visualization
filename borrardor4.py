@@ -6,7 +6,7 @@ import os
 st.title("Visualización de Datos de la Unidad de Pasteurización")
 
 # Directorio donde se encuentran los archivos Excel
-data_dir = "C:/Users/Alejandro/PycharmProjects/bachelorThesis/data"
+data_dir = "/data"
 
 # Nombres de los archivos Excel para cada experimento
 files = {

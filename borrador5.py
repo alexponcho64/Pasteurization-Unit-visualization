@@ -7,7 +7,7 @@ import altair as alt
 st.title("Visualization of Pasteurization Unit Data")
 
 # Directory where the Excel files are located
-data_dir = "C:/Users/Alejandro/PycharmProjects/bachelorThesis/data"
+data_dir = "/data"
 
 # Names of the Excel files for each experiment
 files = {
