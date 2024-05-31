@@ -7,11 +7,8 @@ import altair as alt
 st.title("Digital Twin for a Laboratory Pasteurization Unit")
 
 # Directory where the Excel files are located
-<<<<<<< HEAD
-data_dir = "/data"
-=======
 data_dir = "data"
->>>>>>> 6cb332b (change relative path)
+
 
 files = {
     "Individual step responses": "ptc23_steps_1.xlsx",
