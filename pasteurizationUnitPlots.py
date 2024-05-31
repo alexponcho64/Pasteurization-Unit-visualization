@@ -8,6 +8,10 @@ st.title("Digital Twin for a Laboratory Pasteurization Unit")
 
 # Directory where the Excel files are located
 data_dir = "data"
+<<<<<<< HEAD
+=======
+
+>>>>>>> temp-branch
 
 files = {
     "Individual step responses": "ptc23_steps_1.xlsx",
