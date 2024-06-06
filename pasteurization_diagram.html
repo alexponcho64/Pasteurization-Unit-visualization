@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container {
+            position: relative;
+            width: 100%;
+        }
+        .image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .tooltip {
+            position: absolute;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .red-dot {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            display: inline-block;
+            position: absolute;
+        }
+        .blue-dot {
+            width: 10px;
+            height: 10px;
+            background-color: blue;
+            border-radius: 50%;
+            display: inline-block;
+            position: absolute;
+        }
+        .cyan-dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgb(0, 183, 255);
+            border-radius: 50%;
+            display: inline-block;
+            position: absolute;
+        }
+        .pink-dot {
+            width: 10px;
+            height: 10px;
+            background-color: pink;
+            border-radius: 50%;
+            display: inline-block;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="data:image/png;base64,{{image_base64}}" alt="Pasteurization Unit Diagram" class="image">
+        <div class="tooltip" style="top:45%; left:40%;">
+            <span class="cyan-dot"></span>
+            <span class="tooltiptext">Pf: Power of the pump supplying the raw material (%)</span>
+        </div>
+        <div class="tooltip" style="top:61%; left:82%;">
+            <span class="red-dot"></span>
+            <span class="tooltiptext">Ph: Power of the pump delivering the heating water to the exchanger (%)</span>
+        </div>
+        <div class="tooltip" style="top:27%; left:88%;">
+            <span class="blue-dot"></span>
+            <span class="tooltiptext">Pc: Power of the coil heating the water in the boiler (%)</span>
+        </div>
+        <div class="tooltip" style="top:51%; left:45%;">
+            <span class="blue-dot"></span>
+            <span class="tooltiptext">T1: Temperature of heated product (&deg;C)</span>
+        </div>
+        <div class="tooltip" style="top:28%; left:75%;">
+            <span class="cyan-dot"></span>
+            <span class="tooltiptext">T2: Temperature in the boiler (&deg;C)</span>
+        </div>
+        <div class="tooltip" style="top:59%; left:9%;">
+            <span class="red-dot"></span>
+            <span class="tooltiptext">T3: Temperature of cooled product (&deg;C)</span>
+        </div>
+        <div class="tooltip" style="top:51%; left:64%;">
+            <span class="pink-dot"></span>
+            <span class="tooltiptext">T4: Temperature of heated feed (&deg;C)</span>
+        </div>
+    </div>
+</body>
+</html>
