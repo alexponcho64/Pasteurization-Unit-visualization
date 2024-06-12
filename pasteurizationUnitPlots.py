@@ -1,9 +1,10 @@
 import pandas as pd
 import streamlit as st
 import os
-import altair as alt
 import base64
 from streamlit.components.v1 import html
+import plotly.express as px
+import plotly.graph_objs as go
 
 # Application title
 st.title("Visualization of Pasteurization Unit Data")
@@ -60,28 +61,36 @@ def load_and_display_data(file_path, selected_input_vars, selected_output_vars, 
         # Chart of input variables (power)
         if selected_input_vars:
             st.subheader("Input Profiles (Power)")
-            input_chart = alt.Chart(df).transform_fold(
-                selected_input_vars,
-                as_=['Variable', 'Value']
-            ).mark_line().encode(
-                x=alt.X('Time:Q', title='Time [s]'),
-                y=alt.Y('Value:Q', title='Controlled inputs [%]'),
-                color='Variable:N'
-            ).interactive()
-            st.altair_chart(input_chart, use_container_width=True)
+            fig_input = px.line(df, x='Time', y=selected_input_vars, title='Input Profiles (Power)')
+            fig_input.update_layout(xaxis_title='Time [s]', yaxis_title='Controlled inputs [%]')
+            st.plotly_chart(fig_input)
 
         # Chart of output variables (temperature)
         if selected_output_vars:
             st.subheader("Output Profiles (Temperature)")
-            output_chart = alt.Chart(df).transform_fold(
-                selected_output_vars,
-                as_=['Variable', 'Value']
-            ).mark_line().encode(
-                x=alt.X('Time:Q', title='Time [s]'),
-                y=alt.Y('Value:Q', title='Process Outputs [%]'),
-                color='Variable:N'
-            ).interactive()
-            st.altair_chart(output_chart, use_container_width=True)
+            fig_output = px.line(df, x='Time', y=selected_output_vars, title='Output Profiles (Temperature)')
+            fig_output.update_layout(xaxis_title='Time [s]', yaxis_title='Process Outputs [%]')
+            st.plotly_chart(fig_output)
+
+        # Display statistical summary
+        st.subheader("Statistical Summary")
+        st.write(df.describe())
+
+        # Display heatmap
+        st.subheader("Heatmap of Variables")
+        corr = df[selected_input_vars + selected_output_vars].corr()
+        heatmap = go.Heatmap(
+            z=corr.values,
+            x=corr.columns,
+            y=corr.columns,
+            colorscale='Viridis',
+            text=corr.values,
+            texttemplate="%{text:.2f}"
+        )
+        fig_heatmap = go.Figure(data=heatmap)
+        fig_heatmap.update_layout(title='Correlation matrix heatmap', xaxis_nticks=36)
+        st.plotly_chart(fig_heatmap)
+
     else:
         st.warning(f"The file {file_path} does not exist. Please verify the path.")
 
