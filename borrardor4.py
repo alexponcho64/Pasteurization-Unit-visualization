@@ -4,6 +4,8 @@ import os
 import altair as alt
 import base64
 from streamlit.components.v1 import html
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Application title
 st.title("Visualization of Pasteurization Unit Data")
@@ -82,6 +84,17 @@ def load_and_display_data(file_path, selected_input_vars, selected_output_vars, 
                 color='Variable:N'
             ).interactive()
             st.altair_chart(output_chart, use_container_width=True)
+
+        # Display statistical summary
+        st.subheader("Statistical Summary")
+        st.write(df.describe())
+
+        # Display heatmap
+        st.subheader("Heatmap of Variables")
+        corr = df[selected_input_vars + selected_output_vars].corr()
+        fig, ax = plt.subplots()
+        sns.heatmap(corr, annot=True, cmap='coolwarm', ax=ax)
+        st.pyplot(fig)
     else:
         st.warning(f"The file {file_path} does not exist. Please verify the path.")
 
@@ -125,10 +138,10 @@ html(html_content, height=1000)
 # Display information about the variables
 st.subheader("Variable Descriptions")
 st.markdown("""
-- **T1**: Temperature of heated product (°C)
-- **T2**: Temperature in the boiler (°C)
-- **T3**: Temperature of cooled product (°C)
-- **T4**: Temperature of heated feed (°C)
+- **T1**: Temperature of heated product (&deg;C)
+- **T2**: Temperature in the boiler (&deg;C)
+- **T3**: Temperature of cooled product (&deg;C)
+- **T4**: Temperature of heated feed (&deg;C)
 - **Pc**: Power of the coil heating the water in the boiler (%)
 - **Ph**: Power of the pump delivering the heating water to the exchanger (%)
 - **Pf**: Power of the pump supplying the raw material (%)
